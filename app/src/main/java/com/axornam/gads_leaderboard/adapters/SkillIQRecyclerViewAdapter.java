@@ -16,13 +16,14 @@ import com.axornam.gads_leaderboard.models.SkillIQLeaders;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecyclerViewAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<SkillIQLeaders> mSkillIQLeaders;
+    private List<SkillIQLeaders> mSkillIQLeaders;
 
-    public SkillIQRecyclerViewAdapter(Context context, ArrayList<SkillIQLeaders> skillIQLeaders) {
+    public SkillIQRecyclerViewAdapter(Context context, List<SkillIQLeaders> skillIQLeaders) {
         mContext = context;
         mSkillIQLeaders = skillIQLeaders;
     }
@@ -49,7 +50,8 @@ public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecy
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (mSkillIQLeaders == null) return 0;
+        return mSkillIQLeaders.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

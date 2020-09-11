@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/alert_background">
+
+
+    <Button
+        android:id="@+id/close_alert"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_cancel_24"
+        app:layout_constraintBottom_toTopOf="@id/close_alert"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/close_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="55dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/submit_yes"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/close_alert">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="Are you sure"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#90000000"
+            android:textFontWeight="@android:integer/status_bar_notification_info_maxnum"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="?"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#90000000"
+            android:textFontWeight="@android:integer/status_bar_notification_info_maxnum"
+            android:textSize="55sp"
+            app:layout_constraintBottom_toTopOf="@id/submit_yes"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/close_alert" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/submit_yes"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/yes_btn_background"
+        android:text="YES"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/close_message" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 public interface GadsHoursApi {
 
     @GET("hours")
-    Call<List<LearningLeaders>> getLearningLeaders();
+    Call<List<LearningLeaders>> getHours();
 }

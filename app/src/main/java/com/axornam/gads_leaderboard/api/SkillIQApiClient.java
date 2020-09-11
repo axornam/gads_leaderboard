@@ -7,7 +7,7 @@ public class SkillIQApiClient {
 
     public static Retrofit getRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://gadsapi.herokuapp.com/api")
+                .baseUrl("https://gadsapi.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

@@ -10,5 +10,5 @@ import retrofit2.http.GET;
 public interface GadsSkillIQApi {
 
     @GET("skilliq")
-    Call<List<SkillIQLeaders>> getSkillIQLeaders();
+    Call<List<SkillIQLeaders>> getSkillIq();
 }

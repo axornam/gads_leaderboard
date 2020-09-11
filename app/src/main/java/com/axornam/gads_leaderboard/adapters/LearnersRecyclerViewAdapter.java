@@ -15,14 +15,14 @@ import com.axornam.gads_leaderboard.R;
 import com.axornam.gads_leaderboard.models.LearningLeaders;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class LearnersRecyclerViewAdapter extends RecyclerView.Adapter<LearnersRecyclerViewAdapter.ViewHolder> {
-    ArrayList<LearningLeaders> mInnovatorArrayList;
+    List<LearningLeaders> mLeadersList;
     Context mContext;
 
-    public LearnersRecyclerViewAdapter(Context context, ArrayList<LearningLeaders> innovatorArrayList) {
-        this.mInnovatorArrayList = innovatorArrayList;
+    public LearnersRecyclerViewAdapter(Context context, List<LearningLeaders> leadersList) {
+        this.mLeadersList = leadersList;
         this.mContext = context;
     }
 
@@ -38,17 +38,18 @@ public class LearnersRecyclerViewAdapter extends RecyclerView.Adapter<LearnersRe
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Glide.with(mContext)
                 .asDrawable()
-                .load(mInnovatorArrayList.get(i).getBadgeUrl())
+                .load(mLeadersList.get(i).getBadgeUrl())
                 .into(viewHolder.skillImage);
 
-        viewHolder.innovatorName.setText(mInnovatorArrayList.get(i).getName());
+        viewHolder.innovatorName.setText(mLeadersList.get(i).getName());
         viewHolder.innovatorSkill.setText(String.format("%d Learning Hours, %s",
-                mInnovatorArrayList.get(i).getHours(), mInnovatorArrayList.get(i).getCountry()));
+                mLeadersList.get(i).getHours(), mLeadersList.get(i).getCountry()));
     }
 
     @Override
     public int getItemCount() {
-        return mInnovatorArrayList.size();
+        if(mLeadersList == null) return 0;
+        return mLeadersList.size();
     }
 
 
