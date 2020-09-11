@@ -1,4 +1,4 @@
-package com.axornam.gads_leaderboard;
+package com.axornam.gads_leaderboard.adapters;
 
 import android.content.Context;
 
@@ -7,6 +7,10 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.axornam.gads_leaderboard.FragmentLearningHours;
+import com.axornam.gads_leaderboard.FragmentSkillsIQ;
+import com.axornam.gads_leaderboard.R;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

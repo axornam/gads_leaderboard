@@ -1,4 +1,4 @@
-package com.axornam.gads_leaderboard;
+package com.axornam.gads_leaderboard.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,16 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.axornam.gads_leaderboard.models.Innovator;
+import com.axornam.gads_leaderboard.R;
+import com.axornam.gads_leaderboard.models.LearningLeaders;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    ArrayList<Innovator> mInnovatorArrayList;
+public class LearnersRecyclerViewAdapter extends RecyclerView.Adapter<LearnersRecyclerViewAdapter.ViewHolder> {
+    ArrayList<LearningLeaders> mInnovatorArrayList;
     Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Innovator> innovatorArrayList) {
+    public LearnersRecyclerViewAdapter(Context context, ArrayList<LearningLeaders> innovatorArrayList) {
         this.mInnovatorArrayList = innovatorArrayList;
         this.mContext = context;
     }
@@ -36,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Glide.with(mContext)
+                .asDrawable()
                 .load(mInnovatorArrayList.get(i).getBadgeUrl())
                 .into(viewHolder.skillImage);
 
@@ -51,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     /////////////////////////////////////////////////////////////////
-    ///
+    /// NESTED VIEW HOLDER CLASS FOR RECYCLER VIEW
     /////////////////////////////////////////////////////////////////
     public class ViewHolder extends RecyclerView.ViewHolder {
 

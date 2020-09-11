@@ -3,6 +3,7 @@ package com.axornam.gads_leaderboard;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.axornam.gads_leaderboard.adapters.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;

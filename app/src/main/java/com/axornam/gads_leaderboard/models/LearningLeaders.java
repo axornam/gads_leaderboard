@@ -1,12 +1,12 @@
 package com.axornam.gads_leaderboard.models;
 
-public class Innovator {
+public class LearningLeaders {
     private String name;
     private int hours;
     private String country;
     private String badgeUrl;
 
-    public Innovator(String name, int hours, String country, String badgeUrl) {
+    public LearningLeaders(String name, int hours, String country, String badgeUrl) {
         this.name = name;
         this.hours = hours;
         this.country = country;
