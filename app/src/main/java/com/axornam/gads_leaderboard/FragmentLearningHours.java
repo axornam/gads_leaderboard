@@ -16,6 +16,7 @@ import com.axornam.gads_leaderboard.adapters.LearnersRecyclerViewAdapter;
 import com.axornam.gads_leaderboard.api.HourApiClient;
 import com.axornam.gads_leaderboard.models.LearningLeaders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -27,13 +28,14 @@ import retrofit2.Response;
  */
 public class FragmentLearningHours extends Fragment {
     private static final String TAG = "FragmentLearningHours";
-    private List<LearningLeaders> mInnovators;
+    private List<LearningLeaders> mInnovators = new ArrayList<>();
+    RecyclerView mRecyclerView;
+    LearnersRecyclerViewAdapter mRecyclerViewAdapter;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_learners, container, false);
-
         initArrayList();
         initRecyclerView(root);
         return root;
@@ -49,6 +51,9 @@ public class FragmentLearningHours extends Fragment {
                 if(response.isSuccessful()){
                     Toast.makeText(getContext(), "Hours Api Connection Success", Toast.LENGTH_SHORT).show();
                     mInnovators = response.body();
+                    for(LearningLeaders l: mInnovators) {
+                        Log.d(TAG, "onResponse: User Name: + " + l.getName());
+                    }
                 }
             }
 
@@ -61,9 +66,9 @@ public class FragmentLearningHours extends Fragment {
 
     private void initRecyclerView(View root) {
         Log.d(TAG, "initRecyclerView: Creating Recycler View");
-        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
-        LearnersRecyclerViewAdapter recyclerViewAdapter = new LearnersRecyclerViewAdapter(getActivity().getApplicationContext(),  mInnovators);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView = root.findViewById(R.id.recycler_view);
+        mRecyclerViewAdapter = new LearnersRecyclerViewAdapter(mInnovators);
+        mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

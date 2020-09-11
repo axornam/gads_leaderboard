@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecyclerViewAdapter.ViewHolder> {
-
+    private static final String TAG = "SkillIQRecyclerViewAdap";
     private Context mContext;
-    private List<SkillIQLeaders> mSkillIQLeaders;
+    private List<SkillIQLeaders> mSkillIQLeaders = new ArrayList<>();
 
     public SkillIQRecyclerViewAdapter(Context context, List<SkillIQLeaders> skillIQLeaders) {
         mContext = context;
@@ -31,42 +31,39 @@ public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecy
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_learners, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewholder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         Glide.with(mContext)
-                .asDrawable()
                 .load(mSkillIQLeaders.get(i).getBadgeUrl())
-                .into(viewholder.skillImage);
-
-        viewholder.innovatorName.setText(mSkillIQLeaders.get(i).getName());
-        viewholder.innovatorSkill.setText(String.format("%d Skill IQ Score, %s", mSkillIQLeaders.get(i).getScore(),
+                .into(holder.skillBadge);
+        holder.learnerName.setText(mSkillIQLeaders.get(i).getName());
+        holder.learnerDetails.setText(String.format("%d Skill IQ Score, %s", mSkillIQLeaders.get(i).getScore(),
                 mSkillIQLeaders.get(i).getCountry()));
     }
 
     @Override
     public int getItemCount() {
-        if (mSkillIQLeaders == null) return 0;
+//        if (mSkillIQLeaders == null) return 0;
         return mSkillIQLeaders.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView skillImage;
-        TextView innovatorName;
-        TextView innovatorSkill;
         FrameLayout recyclerItem;
+        ImageView skillBadge;
+        TextView learnerName;
+        TextView learnerDetails;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            skillImage = itemView.findViewById(R.id.skill_badge);
-            innovatorName = itemView.findViewById(R.id.innovator_name);
-            innovatorSkill = itemView.findViewById(R.id.innovator_skill);
             recyclerItem = itemView.findViewById(R.id.recycler_item);
+            skillBadge = itemView.findViewById(R.id.badge);
+            learnerName = itemView.findViewById(R.id.name);
+            learnerDetails = itemView.findViewById(R.id.details);
         }
     }
 }

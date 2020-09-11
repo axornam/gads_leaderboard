@@ -19,17 +19,17 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:contentDescription="SkillIQ of Learning Badge"
-                android:id="@+id/skill_badge"
+                android:id="@+id/badge"
                 android:layout_width="150dp"
                 android:layout_height="80dp"
                 android:layout_margin="12dp"
+                android:contentDescription="SkillIQ of Learning Badge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/innovator_name"
+                android:id="@+id/name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
@@ -38,13 +38,13 @@
                 android:text="John Doe"
                 android:textAlignment="textStart"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                app:layout_constraintBottom_toTopOf="@+id/innovator_skill"
-                app:layout_constraintLeft_toRightOf="@+id/skill_badge"
+                app:layout_constraintBottom_toTopOf="@+id/details"
+                app:layout_constraintLeft_toRightOf="@+id/badge"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/innovator_skill"
+                android:id="@+id/details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
@@ -53,9 +53,9 @@
                 android:padding="3dp"
                 android:text="223 Learning Hours"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/skill_badge"
+                app:layout_constraintLeft_toRightOf="@+id/badge"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/innovator_name" />
+                app:layout_constraintTop_toBottomOf="@id/name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

@@ -17,6 +17,7 @@ import com.axornam.gads_leaderboard.adapters.SkillIQRecyclerViewAdapter;
 import com.axornam.gads_leaderboard.api.SkillIQApiClient;
 import com.axornam.gads_leaderboard.models.SkillIQLeaders;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +26,9 @@ import retrofit2.Response;
 
 public class FragmentSkillsIQ extends Fragment {
     private static final String TAG = "FragmentSkillsIQ";
-    private List<SkillIQLeaders> mSkillIQLeaders;
+    RecyclerView mRecyclerView;
+    SkillIQRecyclerViewAdapter mSkillIQRecyclerViewAdapter;
+    private List<SkillIQLeaders> mSkillIQLeaders = new ArrayList<>();
 
     @Nullable
     @Override
@@ -62,9 +65,9 @@ public class FragmentSkillsIQ extends Fragment {
     private void initRecyclerView(View root) {
         Log.d(TAG, "initRecyclerView: Creating Recycler View");
 
-        RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
-        SkillIQRecyclerViewAdapter recyclerViewAdapter = new SkillIQRecyclerViewAdapter(getActivity().getApplicationContext(), mSkillIQLeaders);
-        recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView = root.findViewById(R.id.recycler_view);
+        mSkillIQRecyclerViewAdapter = new SkillIQRecyclerViewAdapter(getContext(), mSkillIQLeaders);
+        mRecyclerView.setAdapter(mSkillIQRecyclerViewAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }
