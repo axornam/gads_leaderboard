@@ -65,9 +65,6 @@ public class FragmentLearningHours extends Fragment {
         Log.d(TAG, "initArrayList: Initialising Arrays");
 
         if (body.size() != 0) {
-//            for (LearningLeader l : body) {
-//                this.mLearningLeaders.add(l);
-//            }
             this.mLearningLeaders.addAll(body);
             initRecyclerView(mView, this.mLearningLeaders);
         } else {
@@ -83,6 +80,4 @@ public class FragmentLearningHours extends Fragment {
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
-//    private void initRecyclerView(View root) {
-//    }
 }

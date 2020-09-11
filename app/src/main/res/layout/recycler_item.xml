@@ -11,7 +11,7 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        app:cardElevation="4dp"
+        app:cardElevation="5dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="8dp">
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:padding="3dp"
+                android:textSize="20sp"
                 android:text="@string/john_doe"
                 android:textAlignment="textStart"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
@@ -50,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
+                android:textSize="14sp"
                 android:gravity="start"
-                android:padding="3dp"
                 android:text="@string/_223_learning_hours"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/badge"
