@@ -1,21 +1,20 @@
-package com.axornam.gads_leaderboard.api;
+package com.axornam.gads_leaderboard.apiutil;
+
+import com.axornam.gads_leaderboard.api.GadsHoursApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HourApiClient {
 
-    public static Retrofit getRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
+    private static Retrofit getRetrofit() {
+        return new Retrofit.Builder()
                 .baseUrl("https://gadsapi.herokuapp.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        return retrofit;
     }
 
     public static GadsHoursApi getService() {
-        GadsHoursApi service = getRetrofit().create(GadsHoursApi.class);
-        return service;
+        return getRetrofit().create(GadsHoursApi.class);
     }
 }

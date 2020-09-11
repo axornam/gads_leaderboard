@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.adapters.SkillIQRecyclerViewAdapter;
-import com.axornam.gads_leaderboard.api.SkillIQApiClient;
-import com.axornam.gads_leaderboard.models.LearningLeader;
+import com.axornam.gads_leaderboard.apiutil.SkillIQApiClient;
 import com.axornam.gads_leaderboard.models.SkillIQLeader;
 
 import java.util.ArrayList;
@@ -45,8 +44,8 @@ public class FragmentSkillsIQ extends Fragment {
         Call<List<SkillIQLeader>> call = SkillIQApiClient.getService().getSkillIq();
         call.enqueue(new Callback<List<SkillIQLeader>>() {
             @Override
-            public void onResponse(Call<List<SkillIQLeader>> call, Response<List<SkillIQLeader>> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(@NonNull Call<List<SkillIQLeader>> call, @NonNull Response<List<SkillIQLeader>> response) {
+                if (response.isSuccessful() && response.body() != null) {
                     Log.i(TAG, "onResponse: Received Data " + response.body().size());
                     initArrayList(response.body());
                     Toast.makeText(getContext(), "SkillIQ Api Connection Success", Toast.LENGTH_SHORT).show();
@@ -62,10 +61,11 @@ public class FragmentSkillsIQ extends Fragment {
 
     private void initArrayList(List<SkillIQLeader> body) {
         Log.d(TAG, "initArrayList: Initialising Arrays");
-        if(body.size() != 0) {
-            for (SkillIQLeader s : body){
-                this.mSkillIQLeaders.add(s);
-            }
+        if (body.size() != 0) {
+//            for (SkillIQLeader s : body){
+//                this.mSkillIQLeaders.add(s);
+//            }
+            this.mSkillIQLeaders.addAll(body);
             initRecyclerView(mView, this.mSkillIQLeaders);
         }
 

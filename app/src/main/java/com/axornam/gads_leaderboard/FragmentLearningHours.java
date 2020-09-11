@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.adapters.LearnersRecyclerViewAdapter;
-import com.axornam.gads_leaderboard.api.HourApiClient;
+import com.axornam.gads_leaderboard.apiutil.HourApiClient;
 import com.axornam.gads_leaderboard.models.LearningLeader;
 
 import java.util.ArrayList;
@@ -45,8 +45,8 @@ public class FragmentLearningHours extends Fragment {
         Call<List<LearningLeader>> call = HourApiClient.getService().getHours();
         call.enqueue(new Callback<List<LearningLeader>>() {
             @Override
-            public void onResponse(Call<List<LearningLeader>> call, Response<List<LearningLeader>> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(@NonNull Call<List<LearningLeader>> call, @NonNull Response<List<LearningLeader>> response) {
+                if (response.isSuccessful() && response.body() != null) {
                     Log.i(TAG, "onResponse: Received Data " + response.body().size());
                     initArrayList(response.body());
                     Toast.makeText(getContext(), "Hours Api Connection Success", Toast.LENGTH_SHORT).show();
@@ -54,7 +54,7 @@ public class FragmentLearningHours extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<LearningLeader>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<LearningLeader>> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Failed To Connect To Hours Api", Toast.LENGTH_SHORT).show();
             }
         });
@@ -65,9 +65,10 @@ public class FragmentLearningHours extends Fragment {
         Log.d(TAG, "initArrayList: Initialising Arrays");
 
         if (body.size() != 0) {
-            for (LearningLeader l : body) {
-                this.mLearningLeaders.add(l);
-            }
+//            for (LearningLeader l : body) {
+//                this.mLearningLeaders.add(l);
+//            }
+            this.mLearningLeaders.addAll(body);
             initRecyclerView(mView, this.mLearningLeaders);
         } else {
             Log.i(TAG, "initArrayList: No Data Recieved");
