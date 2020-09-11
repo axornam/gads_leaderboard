@@ -49,7 +49,6 @@ public class SubmitActivity extends AppCompatActivity {
 
         mSubmitProjectBtn = findViewById(R.id.submit_project_btn);
         mSubmitProjectBtn.setOnClickListener(view -> {
-            Toast.makeText(getApplicationContext(), "Submitting Project", Toast.LENGTH_SHORT).show();
             showSubmitConfirmDialog();
         });
     }
@@ -59,8 +58,10 @@ public class SubmitActivity extends AppCompatActivity {
         View myView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.alert_confirm, null);
         final AlertDialog dialog = builder.create();
         dialog.setView(myView);
-
         dialog.show();
+
+//        // use generic dialog to show comfirm message
+//        View myView = showGenericDialog(R.layout.alert_confirm);
 
         Button closeAlert = myView.findViewById(R.id.close_alert);
         closeAlert.setOnClickListener(view -> dialog.dismiss());
@@ -76,6 +77,12 @@ public class SubmitActivity extends AppCompatActivity {
 
             submitTheProject(mFirstName, mLastName, mEmailAddress, mGithubLink);
             dialog.dismiss();
+            mFirstNameEditText.setText("");
+            mLastNameEditText.setText("");
+            mEmailAddressEditText.setText("");
+            mGithubLinkEditText.setText("");
+            Toast.makeText(getApplicationContext(), "Submitting Project", Toast.LENGTH_LONG).show();
+
         });
 
     }
@@ -100,21 +107,19 @@ public class SubmitActivity extends AppCompatActivity {
         });
     }
 
-    private void showSubmitSuccessDialog() {
+    private void showGenericDialog(int alert_type) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View myView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.alert_success, null);
+        View myView = LayoutInflater.from(getApplicationContext()).inflate(alert_type, null);
         final AlertDialog dialog = builder.create();
         dialog.setView(myView);
-
         dialog.show();
     }
 
-    private void showSubmitFailDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View myView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.alert_failure, null);
-        final AlertDialog dialog = builder.create();
-        dialog.setView(myView);
+    private void showSubmitSuccessDialog() {
+        showGenericDialog(R.layout.alert_success);
+    }
 
-        dialog.show();
+    private void showSubmitFailDialog() {
+        showGenericDialog(R.layout.alert_failure);
     }
 }
