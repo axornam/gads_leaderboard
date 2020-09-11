@@ -51,6 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     /////////////////////////////////////////////////////////////////
+    ///
     /////////////////////////////////////////////////////////////////
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -59,14 +60,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView innovatorSkill;
         FrameLayout recyclerItem;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             skillImage = itemView.findViewById(R.id.skill_badge);
             innovatorName = itemView.findViewById(R.id.innovator_name);
             innovatorSkill = itemView.findViewById(R.id.innovator_skill);
             recyclerItem = itemView.findViewById(R.id.recycler_item);
-
         }
-    }
+    }////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 }
