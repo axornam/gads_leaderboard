@@ -1,32 +1,32 @@
 package com.axornam.gads_leaderboard.models;
 
-public class LearningLeaders {
+public class SkillIQLeader {
     private String name;
-    private int hours;
+    private int score;
     private String country;
     private String badgeUrl;
 
-    public LearningLeaders(String name, int hours, String country, String badgeUrl) {
+    public SkillIQLeader(String name, int score, String country, String badgeUrl) {
         this.name = name;
-        this.hours = hours;
+        this.score = score;
         this.country = country;
         this.badgeUrl = badgeUrl;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getHours() {
-        return hours;
+    public int getScore() {
+        return score;
     }
 
-    public void setHours(int hours) {
-        this.hours = hours;
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getCountry() {

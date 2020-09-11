@@ -12,24 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.R;
-import com.axornam.gads_leaderboard.models.LearningLeaders;
+import com.axornam.gads_leaderboard.models.LearningLeader;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 public class LearnersRecyclerViewAdapter extends RecyclerView.Adapter<LearnersRecyclerViewAdapter.ViewHolder> {
-    List<LearningLeaders> mLeadersList;
+    List<LearningLeader> mLeadersList;
     Context mContext;
 
-    public LearnersRecyclerViewAdapter(List<LearningLeaders> leadersList) {
+    public LearnersRecyclerViewAdapter(Context context, List<LearningLeader> leadersList) {
         this.mLeadersList = leadersList;
+        this.mContext = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item, viewGroup, false);
-        this.mContext = viewGroup.getContext();
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -37,7 +37,7 @@ public class LearnersRecyclerViewAdapter extends RecyclerView.Adapter<LearnersRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Glide.with(mContext)
-                .asDrawable()
+                .asBitmap()
                 .load(mLeadersList.get(i).getBadgeUrl())
                 .into(viewHolder.skillBadge);
 

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.R;
-import com.axornam.gads_leaderboard.models.SkillIQLeaders;
+import com.axornam.gads_leaderboard.models.SkillIQLeader;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ import java.util.List;
 public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "SkillIQRecyclerViewAdap";
     private Context mContext;
-    private List<SkillIQLeaders> mSkillIQLeaders = new ArrayList<>();
+    private List<SkillIQLeader> mSkillIQLeaders = new ArrayList<>();
 
-    public SkillIQRecyclerViewAdapter(Context context, List<SkillIQLeaders> skillIQLeaders) {
+    public SkillIQRecyclerViewAdapter(Context context, List<SkillIQLeader> skillIQLeaders) {
         mContext = context;
         mSkillIQLeaders = skillIQLeaders;
     }
@@ -39,6 +39,7 @@ public class SkillIQRecyclerViewAdapter extends RecyclerView.Adapter<SkillIQRecy
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         Glide.with(mContext)
+                .asBitmap()
                 .load(mSkillIQLeaders.get(i).getBadgeUrl())
                 .into(holder.skillBadge);
         holder.learnerName.setText(mSkillIQLeaders.get(i).getName());

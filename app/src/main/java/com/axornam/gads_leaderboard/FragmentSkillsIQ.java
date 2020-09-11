@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.adapters.SkillIQRecyclerViewAdapter;
 import com.axornam.gads_leaderboard.api.SkillIQApiClient;
-import com.axornam.gads_leaderboard.models.SkillIQLeaders;
+import com.axornam.gads_leaderboard.models.LearningLeader;
+import com.axornam.gads_leaderboard.models.SkillIQLeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,45 +29,53 @@ public class FragmentSkillsIQ extends Fragment {
     private static final String TAG = "FragmentSkillsIQ";
     RecyclerView mRecyclerView;
     SkillIQRecyclerViewAdapter mSkillIQRecyclerViewAdapter;
-    private List<SkillIQLeaders> mSkillIQLeaders = new ArrayList<>();
+    private List<SkillIQLeader> mSkillIQLeaders = new ArrayList<>();
+    View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_learners, container, false);
-        initArrayList();
-        initRecyclerView(view);
-
-        return view;
+        mView = inflater.inflate(R.layout.fragment_learners, container, false);
+        getApiList();
+        return mView;
     }
 
-    private void initArrayList() {
-        Log.d(TAG, "initArrayList: Initialising Arrays");
-
-        Call<List<SkillIQLeaders>> call = SkillIQApiClient.getService().getSkillIq();
-        call.enqueue(new Callback<List<SkillIQLeaders>>() {
+    private void getApiList() {
+        Call<List<SkillIQLeader>> call = SkillIQApiClient.getService().getSkillIq();
+        call.enqueue(new Callback<List<SkillIQLeader>>() {
             @Override
-            public void onResponse(Call<List<SkillIQLeaders>> call, Response<List<SkillIQLeaders>> response) {
-                if(response.isSuccessful()){
-                    mSkillIQLeaders = response.body();
-                    Log.d(TAG, "onResponse: " + response.body().toString());
+            public void onResponse(Call<List<SkillIQLeader>> call, Response<List<SkillIQLeader>> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: Received Data " + response.body().size());
+                    initArrayList(response.body());
                     Toast.makeText(getContext(), "SkillIQ Api Connection Success", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<SkillIQLeaders>> call, Throwable t) {
+            public void onFailure(Call<List<SkillIQLeader>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed To Connect To SkillIQ Api", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void initRecyclerView(View root) {
+    private void initArrayList(List<SkillIQLeader> body) {
+        Log.d(TAG, "initArrayList: Initialising Arrays");
+        if(body.size() != 0) {
+            for (SkillIQLeader s : body){
+                this.mSkillIQLeaders.add(s);
+            }
+            initRecyclerView(mView, this.mSkillIQLeaders);
+        }
+
+    }
+
+    private void initRecyclerView(View view, List<SkillIQLeader> skillIQLeaders) {
         Log.d(TAG, "initRecyclerView: Creating Recycler View");
 
-        mRecyclerView = root.findViewById(R.id.recycler_view);
-        mSkillIQRecyclerViewAdapter = new SkillIQRecyclerViewAdapter(getContext(), mSkillIQLeaders);
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mSkillIQRecyclerViewAdapter = new SkillIQRecyclerViewAdapter(getContext(), skillIQLeaders);
         mRecyclerView.setAdapter(mSkillIQRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

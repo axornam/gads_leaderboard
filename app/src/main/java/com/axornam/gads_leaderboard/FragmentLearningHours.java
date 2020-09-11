@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.axornam.gads_leaderboard.adapters.LearnersRecyclerViewAdapter;
 import com.axornam.gads_leaderboard.api.HourApiClient;
-import com.axornam.gads_leaderboard.models.LearningLeaders;
+import com.axornam.gads_leaderboard.models.LearningLeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,47 +28,60 @@ import retrofit2.Response;
  */
 public class FragmentLearningHours extends Fragment {
     private static final String TAG = "FragmentLearningHours";
-    private List<LearningLeaders> mInnovators = new ArrayList<>();
+    private List<LearningLeader> mLearningLeaders = new ArrayList<>();
+    View mView;
     RecyclerView mRecyclerView;
     LearnersRecyclerViewAdapter mRecyclerViewAdapter;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_learners, container, false);
-        initArrayList();
-        initRecyclerView(root);
-        return root;
+        mView = inflater.inflate(R.layout.fragment_learners, container, false);
+        getApiList();
+        return mView;
     }
 
-    private void initArrayList() {
-        Log.d(TAG, "initBitMaps: Initializing Image Bitmaps");
-
-        Call<List<LearningLeaders>> call = HourApiClient.getService().getHours();
-        call.enqueue(new Callback<List<LearningLeaders>>() {
+    private void getApiList() {
+        Call<List<LearningLeader>> call = HourApiClient.getService().getHours();
+        call.enqueue(new Callback<List<LearningLeader>>() {
             @Override
-            public void onResponse(Call<List<LearningLeaders>> call, Response<List<LearningLeaders>> response) {
-                if(response.isSuccessful()){
+            public void onResponse(Call<List<LearningLeader>> call, Response<List<LearningLeader>> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "onResponse: Received Data " + response.body().size());
+                    initArrayList(response.body());
                     Toast.makeText(getContext(), "Hours Api Connection Success", Toast.LENGTH_SHORT).show();
-                    mInnovators = response.body();
-                    for(LearningLeaders l: mInnovators) {
-                        Log.d(TAG, "onResponse: User Name: + " + l.getName());
-                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<LearningLeaders>> call, Throwable t) {
+            public void onFailure(Call<List<LearningLeader>> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed To Connect To Hours Api", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
-    private void initRecyclerView(View root) {
+    private void initArrayList(List<LearningLeader> body) {
+        Log.d(TAG, "initArrayList: Initialising Arrays");
+
+        if (body.size() != 0) {
+            for (LearningLeader l : body) {
+                this.mLearningLeaders.add(l);
+            }
+            initRecyclerView(mView, this.mLearningLeaders);
+        } else {
+            Log.i(TAG, "initArrayList: No Data Recieved");
+        }
+    }
+
+    private void initRecyclerView(View view, List<LearningLeader> learningLeaders) {
         Log.d(TAG, "initRecyclerView: Creating Recycler View");
-        mRecyclerView = root.findViewById(R.id.recycler_view);
-        mRecyclerViewAdapter = new LearnersRecyclerViewAdapter(mInnovators);
+
+        mRecyclerView = view.findViewById(R.id.recycler_view);
+        mRecyclerViewAdapter = new LearnersRecyclerViewAdapter(getContext(), learningLeaders);
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
+//    private void initRecyclerView(View root) {
+//    }
 }
