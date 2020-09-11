@@ -1,13 +1,16 @@
 package com.axornam.gads_leaderboard;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.axornam.gads_leaderboard.apiutil.SubmitAPIClient;
@@ -19,11 +22,27 @@ import retrofit2.Response;
 public class SubmitActivity extends AppCompatActivity {
     private Button mGoBackBtn;
     private Button mSubmitProjectBtn;
+    private EditText mFirstNameEditText;
+    private EditText mLastNameEditText;
+    private EditText mEmailAddressEditText;
+    private EditText mGithubLinkEditText;
+
+    private String mFirstName;
+    private String mLastName;
+    private String mEmailAddress;
+    private String mGithubLink;
+
+    private static final String TAG = "SubmitActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
+
+        mFirstNameEditText = findViewById(R.id.first_name_input);
+        mLastNameEditText = findViewById(R.id.last_name_input);
+        mEmailAddressEditText = findViewById(R.id.email_address_input);
+        mGithubLinkEditText = findViewById(R.id.gitub_link_input);
 
         mGoBackBtn = findViewById(R.id.goBackBtn);
         mGoBackBtn.setOnClickListener(view -> SubmitActivity.super.onBackPressed());
@@ -49,7 +68,13 @@ public class SubmitActivity extends AppCompatActivity {
         Button finalSubmit = myView.findViewById(R.id.submit_yes);
         finalSubmit.setOnClickListener((View.OnClickListener) v -> {
             // Launch The Function that submit the final project details
-            submitTheProject("Richard", "lastname", "email@address", "gitub.link");
+
+            mFirstName = mFirstNameEditText.getText().toString();
+            mLastName = mLastNameEditText.getText().toString();
+            mEmailAddress = mEmailAddressEditText.getText().toString();
+            mGithubLink = mGithubLinkEditText.getText().toString();
+
+            submitTheProject(mFirstName, mLastName, mEmailAddress, mGithubLink);
             dialog.dismiss();
         });
 
@@ -59,14 +84,17 @@ public class SubmitActivity extends AppCompatActivity {
         Call<Void> call = SubmitAPIClient.getService().submitProject(emailAddress, firstName, lastName, githubLink);
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call,@NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
+                    Log.d(TAG, "onResponse: Submission Code: " + response.code());
                     showSubmitSuccessDialog();
+                } else {
+                    showSubmitFailDialog();
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@Nullable Call<Void> call, @Nullable Throwable t) {
                 showSubmitFailDialog();
             }
         });

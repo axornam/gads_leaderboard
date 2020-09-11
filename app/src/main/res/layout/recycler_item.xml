@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recycler_item"
     android:layout_width="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="8dp">
@@ -20,10 +21,10 @@
 
             <ImageView
                 android:id="@+id/badge"
-                android:layout_width="150dp"
-                android:layout_height="80dp"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
                 android:layout_margin="12dp"
-                android:contentDescription="SkillIQ of Learning Badge"
+                android:contentDescription="@string/skilliq_of_learning_badge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +36,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:padding="3dp"
-                android:text="John Doe"
+                android:text="@string/john_doe"
                 android:textAlignment="textStart"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
                 app:layout_constraintBottom_toTopOf="@+id/details"
@@ -49,9 +50,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:gravity="left"
+                android:gravity="start"
                 android:padding="3dp"
-                android:text="223 Learning Hours"
+                android:text="@string/_223_learning_hours"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/badge"
                 app:layout_constraintRight_toRightOf="parent"

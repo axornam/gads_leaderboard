@@ -5,4 +5,7 @@
     <string name="tab_text_1">Learning Leaders</string>
     <string name="tab_text_2">Skill IQ Leaders</string>
     <string name="submit">Submit</string>
+    <string name="skilliq_of_learning_badge">SkillIQ of Learning Badge</string>
+    <string name="john_doe">John Doe</string>
+    <string name="_223_learning_hours">223 Learning Hours</string>
 </resources>
