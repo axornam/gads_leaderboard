@@ -48,7 +48,13 @@
                 android:gravity="center"
                 android:text="Project Submission"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/holo_orange_light" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="2dp"
+                android:background="@drawable/project_submit_styling" />
         </LinearLayout>
 
 
